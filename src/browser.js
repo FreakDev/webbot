@@ -23,6 +23,10 @@ export default class Browser {
 
     _config = {}
 
+    get currentPageUrl() {
+        return this._page ? this._page.url() : "";
+    }
+
     constructor() {
         this._config = Object.assign({}, DEFAULT_CONFIG)
     }
@@ -40,11 +44,23 @@ export default class Browser {
     async goto(url) {
         this._page = (await this._browser.pages())[0];
         await this._page.setViewport(this._config.pageViewport);
-        return await this._page.goto(url);
+        return this._page.goto(url);
     }
 
-    async evaluate(scriptCallback) {
-        return await this._page.evaluate(scriptCallback)
+    async getNodes (selector) {
+        await this._page.waitFor(selector => !!document.querySelector(selector), {}, selector);
+        return this._page.$$(selector);
+    }
+
+    async click (selector) {
+        const btn = await this.getNodes(selector);
+        await this._page.waitFor(selector => !!document.querySelector(selector), {}, selector);
+
+        return this._page.click(selector);
+    }
+
+    async evaluate(scriptToEvaluate) {
+        return this._page.evaluate(scriptToEvaluate);
     }
 
 }
