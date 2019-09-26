@@ -1,0 +1,42 @@
+{
+  "name": "boilerplate-babel-webpack",
+  "version": "1.0.4",
+  "description": "",
+  "license": "MIT",
+  "author": {
+    "name": "Mathias Desloges"
+  },
+  "scripts": {
+    "clear": "rm -rf dist/",
+    "clear:all": "rm -rf node_modules/ && yarn run clear",
+    "count": "find src -name '*.js' | xargs wc -l | sort -r",
+    "build": "webpack",
+    "watch": "webpack -w",
+    "start": "node dist/main.js"
+  },
+  "keywords": [
+    "webpack",
+    "babel",
+    "starter",
+    "source map",
+    "explorer",
+    "count",
+    "loc"
+  ],
+  "dependencies": {
+    "puppeteer": "^1.20.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "mini-css-extract-plugin": "^0.6.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "source-map-explorer": "^1.7.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}
