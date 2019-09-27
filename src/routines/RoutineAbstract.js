@@ -1,12 +1,19 @@
 export default class Routine {
 
     /**
-     *
+     * @var {Browser}
      */
     _browser = null;
 
-    constructor (browser) {
+    /**
+     * @var {Logger}
+     */
+    _logger = null
+
+    constructor (browser, logger) {
         this._browser = browser
+
+        this._logger = logger
     }
 
     run () {}

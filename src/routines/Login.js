@@ -4,14 +4,9 @@ import Routine from "./RoutineAbstract";
 export default class Login extends Routine {
 
     async run () {
-        return new Promise(async (resolve, reject) => {
-
-            await this._gotoLoginPage()
-
-            await this._waitForLogin()
-
-            resolve();
-        })
+        this._logger.log('start')
+        await this._gotoLoginPage()
+        await this._waitForLogin()
     }
 
     async _gotoLoginPage () {
@@ -29,7 +24,8 @@ export default class Login extends Routine {
                 output: process.stdout
             });
 
-            rl.question('Please log in to instagram, then press "enter" here', () => {
+            this._logger.info("Please log in to instagram, then press \"enter\" here");
+            rl.question("", () => {
 
                 rl.close();
                 resolve();

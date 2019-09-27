@@ -3,6 +3,9 @@ import Routine from "./RoutineAbstract";
 export default class GetUserFollowers extends Routine {
 
     async run (username) {
+
+        this._logger.log('start')
+        
         await this._gotoProfilePage(username)
         await this._openFollowersList()
         await this._fetchAllFollowers()
