@@ -4,7 +4,8 @@ const DEFAULT_CONFIG = {
     main: {
         headless: false,
         executablePath: "/home/mathias/Téléchargements/chrome-linux/chrome",
-        defaultViewport: null
+        defaultViewport: null, 
+        args: ["--no-sandbox", "--disable-infobars"]
     },
     windowDimensions: {
 
@@ -44,23 +45,31 @@ export default class Browser {
     async goto(url) {
         this._page = (await this._browser.pages())[0];
         await this._page.setViewport(this._config.pageViewport);
-        return this._page.goto(url);
+        return await this._page.goto(url);
     }
 
     async getNodes (selector) {
-        await this._page.waitFor(selector => !!document.querySelector(selector), {}, selector);
-        return this._page.$$(selector);
+        await this._page.waitForSelector(selector);
+        return await this._page.$$(selector);
     }
 
     async click (selector) {
-        const btn = await this.getNodes(selector);
-        await this._page.waitFor(selector => !!document.querySelector(selector), {}, selector);
-
-        return this._page.click(selector);
+        await this._page.waitForSelector(selector);
+        return await this._page.click(selector);
     }
 
-    async evaluate(scriptToEvaluate) {
-        return this._page.evaluate(scriptToEvaluate);
+    async evaluate(scriptToEvaluate, ...args) {
+        return await this._page.evaluate(scriptToEvaluate, ...args);
+    }
+
+    async getHTML (selector) {
+        await this._page.waitForSelector(selector);
+        return await this._page.$$eval(selector, nodes => nodes.map(n => n.innerHTML));
+    }
+
+    async getText (selector) {
+        await this._page.waitForSelector(selector);
+        return await this._page.$$eval(selector, nodes => nodes.map(n => n.innerText));
     }
 
 }
