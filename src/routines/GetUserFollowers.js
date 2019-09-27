@@ -39,7 +39,6 @@ export default class GetUserFollowers extends Routine {
                     else {
                         endReachedCount++;
                         if (endReachedCount > endReachedLimit) {
-                            document.body.classList.add("all_followers_displayed")
                             resolve(true);
                             return;
                         }
