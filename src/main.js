@@ -1,4 +1,4 @@
-import Browser from "./browser"
+import Browser from "./Browser"
 import GetUserFollowers from "./routines/GetUserFollowers";
 import Login from "./routines/Login";
 import GetUserFollowing from "./routines/GetUserFollowing";
