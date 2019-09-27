@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate-babel-webpack",
+  "name": "webbot",
   "version": "1.0.4",
   "description": "",
   "license": "MIT",
@@ -31,11 +31,6 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.3.4",
     "babel-loader": "^8.0.5",
-    "css-loader": "^2.1.1",
-    "mini-css-extract-plugin": "^0.6.0",
-    "node-sass": "^4.11.0",
-    "sass-loader": "^7.1.0",
-    "source-map-explorer": "^1.7.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   }
