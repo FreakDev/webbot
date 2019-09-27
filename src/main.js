@@ -9,7 +9,8 @@ const getUserFollowers = new GetUserFollowers(b);
 (async function () {
     await b.start();
     await login.run();
-    await getUserFollowers.run("chezmathias");
+    let f = await getUserFollowers.run("freakdev")
+    console.log(f);
 })();
 
 
