@@ -1,7 +1,7 @@
 import readline from "readline";
-import Routine from "./RoutineAbstract";
+import RoutineAbstract from "./RoutineAbstract";
 
-export default class Login extends Routine {
+export default class Login extends RoutineAbstract {
 
     async run () {
         this._logger.log('start')
@@ -26,7 +26,6 @@ export default class Login extends Routine {
 
             this._logger.info("Please log in to instagram, then press \"enter\" here");
             rl.question("", () => {
-
                 rl.close();
                 resolve();
             });

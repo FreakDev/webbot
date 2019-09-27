@@ -1,4 +1,4 @@
-export default class Routine {
+export default class RoutineAbstract {
 
     /**
      * @var {Browser}

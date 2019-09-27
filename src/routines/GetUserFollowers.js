@@ -1,11 +1,11 @@
-import Routine from "./RoutineAbstract";
+import RoutineAbstract from "./RoutineAbstract";
 
-export default class GetUserFollowers extends Routine {
+export default class GetUserFollowers extends RoutineAbstract {
 
     async run (username) {
 
         this._logger.log('start')
-        
+
         await this._gotoProfilePage(username)
         await this._openFollowersList()
         await this._fetchAllFollowers()
