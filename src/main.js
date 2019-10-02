@@ -1,18 +1,16 @@
 import Browser from "./Browser"
-import GetUserFollowers from "./routines/GetUserFollowers";
 import Login from "./routines/Login";
-import GetUserFollowing from "./routines/GetUserFollowing";
 import Logger from "./Logger";
+import LikeLatestPhotosByTag from "./routines/LikeLatestPhotosByTag";
 
 const b = new Browser();
 
 const login = new Login(b, new Logger("LOGIN"));
-const getUserFollowing = new GetUserFollowing(b, new Logger("GET FOLLOWING"));
-const getUserFollowers = new GetUserFollowers(b, new Logger("GET FOLLOWERS"));
+const likeLatestByTag = new LikeLatestPhotosByTag(b, new Logger("LIKE LATEST"));
 
 (async function () {
     await b.start();
     await login.run();
-    let f = await getUserFollowers.run("freakdev")
+    let f = await likeLatestByTag.run("streetphotography")
     console.log(f);
 })();
