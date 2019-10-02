@@ -27,6 +27,10 @@ export default class Logger
         this._prefix = prefix
     }
 
+    createInstance(prefix) {
+        return new Logger(prefix);
+    }
+
     log (...messages) {
         this._write(RESET, ...this._getPrefixedMessage(...messages))
     }
