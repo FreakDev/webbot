@@ -13,7 +13,8 @@ const DEFAULT_CONFIG = {
     pageViewport: {
         width: 1024,
         height: 768
-    }
+    },
+    defaultTimeout: 3000,
 }
 
 export default class Browser {
@@ -45,6 +46,7 @@ export default class Browser {
     async goto(url) {
         this._page = (await this._browser.pages())[0];
         await this._page.setViewport(this._config.pageViewport);
+        await this._page.setDefaultTimeout(this._config.defaultTimeout);
         return await this._page.goto(url);
     }
 
