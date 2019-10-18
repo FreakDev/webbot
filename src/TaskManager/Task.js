@@ -7,11 +7,17 @@ export default class Task extends Deferred {
      * @param {routines/RoutineAbstract} routine 
      * @param {Array} params 
      */
-    constructor(routine, params) {
+    constructor(routine, params, name) {
         super()
 
         this._routine = routine
         this._params = params
+
+        this._name = name || this._routine.name
+    }
+
+    get name () {
+        return this._name
     }
 
     async run () {

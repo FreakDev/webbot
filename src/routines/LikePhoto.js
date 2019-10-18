@@ -5,6 +5,8 @@ const LIKED_BTN_SELECTOR = "[aria-label=Unlike]";
 
 export default class LikePhoto extends RoutineAbstract {
 
+    _name = "like-photo"
+
     async run (photoUrl) {
 
         this._logger.info("browse ", photoUrl);

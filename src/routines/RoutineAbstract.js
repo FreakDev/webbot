@@ -12,6 +12,12 @@ export default class RoutineAbstract {
      */
     _logger = null
 
+    _name = "ABSTRACT - should be overiden"
+
+    get name() {
+        return this._name
+    }
+
     constructor (browser, logger, taskManager) {
         this._browser = browser
 
