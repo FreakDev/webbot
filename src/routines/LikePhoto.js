@@ -15,7 +15,6 @@ export default class LikePhoto extends RoutineAbstract {
             return true;
         }
 
-        this._logger.info("Liking the photo");
         await this._tryLike();
         const likeResult = await this._checkLiked();
         if (likeResult) {

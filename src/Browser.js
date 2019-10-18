@@ -51,12 +51,12 @@ export default class Browser {
     }
 
     async getNodes (selector) {
-        await this._page.waitForSelector(selector);
+        await this.waitForSelector(selector);
         return await this._page.$$(selector);
     }
 
     async click (selector) {
-        await this._page.waitForSelector(selector);
+        await this.waitForSelector(selector);
         return await this._page.click(selector);
     }
 
@@ -65,13 +65,16 @@ export default class Browser {
     }
 
     async getHTML (selector) {
-        await this._page.waitForSelector(selector);
+        await this.waitForSelector(selector);
         return await this._page.$$eval(selector, nodes => nodes.map(n => n.innerHTML));
     }
 
     async getText (selector) {
-        await this._page.waitForSelector(selector);
+        await this.waitForSelector(selector);
         return await this._page.$$eval(selector, nodes => nodes.map(n => n.innerText));
     }
 
+    async waitForSelector(selector) {
+        await this._page.waitForSelector(selector);
+    }
 }

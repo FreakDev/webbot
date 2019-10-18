@@ -1,3 +1,5 @@
+import TaskManager from "../TaskManager/TaskManager"
+
 export default class RoutineAbstract {
 
     /**
@@ -10,10 +12,12 @@ export default class RoutineAbstract {
      */
     _logger = null
 
-    constructor (browser, logger) {
+    constructor (browser, logger, taskManager) {
         this._browser = browser
 
         this._logger = logger
+
+        this._taskManager = taskManager
     }
 
     run () {}
