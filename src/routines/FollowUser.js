@@ -4,6 +4,8 @@ const FOLLOW_BTN_SELECTOR = "header section span:nth-child(1) button";
 
 export default class FollowUser extends RoutineAbstract {
 
+    _name = "follow-user"
+
     async run (username) {
 
         this._logger.log('start')
@@ -32,7 +34,7 @@ export default class FollowUser extends RoutineAbstract {
     }
 
     async _checkAlreadyFollowed () {
-        followBtn = await this._browser.getNodes(FOLLOW_BTN_SELECTOR);
-        return followBtn.evaluate(btn => btn.innerText.includes('('));
+        const followBtn = await this._browser.getNodes(FOLLOW_BTN_SELECTOR);
+        return followBtn[0].evaluate(btn => btn.innerText.includes('Following'));
     }
 }
