@@ -16,6 +16,10 @@ module.exports = {
         path: path.resolve('./dist')
     },
 
+    node: {
+        __dirname: false
+    },
+
     module: {
         rules: [
             {
