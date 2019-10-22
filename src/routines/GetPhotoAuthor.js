@@ -19,7 +19,7 @@ export default class GetPhotoAuthor extends RoutineAbstract {
     }
 
     async _extractAuthor () {
-        authors = await this._browser.getText(AUTHOR_BTN_SELECTOR);
+        const authors = await this._browser.getText(AUTHOR_BTN_SELECTOR);
         return authors[0];
     }
 }
