@@ -1,7 +1,10 @@
 import Browser from "./Browser"
 import Login from "./routines/Login";
 import Logger from "./Logger";
+
 import ProcessLatestPhotosByTag from "./routines/ProcessLatestPhotosByTag";
+import CheckUnfollow from "./routines/CheckUnfollow";
+
 import TaskManager from "./TaskManager/TaskManager";
 import Task from "./TaskManager/Task";
 
@@ -19,6 +22,9 @@ const login = new Login(b, new Logger("LOGIN"));
     // unfollow
     tm.add(
         new Task(new ProcessLatestPhotosByTag(b, new Logger("LIKE LATEST"), tm), ["streetphotography"])
-    )
+    );
+    tm.add(
+        new Task(new CheckUnfollow(b, new Logger("CHECK UNFOLLOW"), tm))
+    )    
     tm.run()
 })();
