@@ -19,7 +19,9 @@ export default class TaskManager {
     }
 
     async _pop () {
-        const task = this._stack.pop()
+        const task = this._stack.shift()
+
+        console.log(task.name)
 
         await task.run()
     }
