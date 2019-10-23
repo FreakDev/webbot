@@ -14,7 +14,7 @@ const DEFAULT_CONFIG = {
         width: 1024,
         height: 768
     },
-    defaultTimeout: 3000,
+    defaultTimeout: 5000,
 }
 
 export default class Browser {
@@ -74,7 +74,7 @@ export default class Browser {
         return await this._page.$$eval(selector, nodes => nodes.map(n => n.innerText));
     }
 
-    async waitForSelector(selector) {
-        await this._page.waitForSelector(selector);
+    async waitForSelector(selector, opts) {
+        await this._page.waitForSelector(selector, opts);
     }
 }
