@@ -24,7 +24,7 @@ const login = new Login(b, new Logger("LOGIN"));
         new Task(new CheckUnfollow(b, new Logger("CHECK UNFOLLOW"), tm))
     );
     tm.add(
-        new Task(new ProcessLatestPhotosByTag(b, new Logger("LIKE LATEST"), tm), ["homemadecooking"])
+        new Task(new ProcessLatestPhotosByTag(b, new Logger("LIKE LATEST"), tm), [["homemadecooking"]])
     );
     tm.run()
 })();
