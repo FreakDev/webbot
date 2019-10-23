@@ -19,7 +19,7 @@ export default class LikePhoto extends RoutineAbstract {
 
         await this._tryLike();
         const likeResult = await this._checkLiked();
-        if (likeResult) {
+        if (likeResult && await this._noDialog() ) {
             this._logger.info("Liked <3");
         } else {
             this._logger.warn("Oups... </3");
@@ -43,5 +43,16 @@ export default class LikePhoto extends RoutineAbstract {
             fulfilledHeart = await this._browser.getNodes(LIKED_BTN_SELECTOR, { timeout: 1000 });
         } catch (e) {}
         return fulfilledHeart.length === 1;
+    }
+
+    async _noDialog() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this._browser.waitForSelector("div[role=dialog]", { timeout: 500 });
+                resolve(false);
+            } catch (e) {
+                resolve(true);
+            }    
+        })
     }
 }

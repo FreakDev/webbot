@@ -8,13 +8,20 @@ export default class FollowUser extends RoutineAbstract {
 
     async run (username) {
 
-        this._logger.log('start')
+        this._logger.info('start')
 
         await this._gotoProfilePage(username)
         const alreadyFollowed = await this._checkAlreadyFollowed()
         if (!alreadyFollowed) {
             await this._tryFollow()
-            return await this._checkAlreadyFollowed();
+            const result = await this._checkAlreadyFollowed();
+            if (result && await this._noDialog()) {
+                this._logger.info('ok, now i follow you :)')
+                return true
+            } else {
+                this._logger.warn("oooops... i can't follow you")
+                return false
+            }
         } else {
             this._logger.info("Already followed");
         }
@@ -37,4 +44,15 @@ export default class FollowUser extends RoutineAbstract {
         const followBtn = await this._browser.getNodes(FOLLOW_BTN_SELECTOR);
         return followBtn[0].evaluate(btn => btn.innerText.includes('Following'));
     }
+
+    async _noDialog() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await this._browser.waitForSelector("div[role=dialog]", { timeout: 500 });
+                resolve(false);
+            } catch (e) {
+                resolve(true);
+            }    
+        })
+    }    
 }
