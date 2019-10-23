@@ -21,10 +21,10 @@ const login = new Login(b, new Logger("LOGIN"));
     // who i am
     // unfollow
     tm.add(
-        new Task(new ProcessLatestPhotosByTag(b, new Logger("LIKE LATEST"), tm), ["streetphotography"])
+        new Task(new CheckUnfollow(b, new Logger("CHECK UNFOLLOW"), tm))
     );
     tm.add(
-        new Task(new CheckUnfollow(b, new Logger("CHECK UNFOLLOW"), tm))
-    )    
+        new Task(new ProcessLatestPhotosByTag(b, new Logger("LIKE LATEST"), tm), ["homemadecooking"])
+    );
     tm.run()
 })();

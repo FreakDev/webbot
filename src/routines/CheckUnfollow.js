@@ -3,7 +3,11 @@ import RoutineAbstract from "./RoutineAbstract";
 import UnfollowUser from "./UnfollowUser";
 import Task from "../TaskManager/Task";
 
-export default class ProcessLatestPhotosByTag extends RoutineAbstract {
+export default class CheckUnfollow extends RoutineAbstract {
+
+    _name = "check-unfollow"
+
+    _skippable = true
 
     async run () {
         const followingList = this._readStorage(),
@@ -16,10 +20,9 @@ export default class ProcessLatestPhotosByTag extends RoutineAbstract {
         while (i < listLen) {
             let entry = followingList[i];
             const entryDate = new Date(entry.date);
-            console.log(entry.name)
 
-            if (today.getTime() - entryDate.getTime() > 100) {
-                await unfollowUserRoutine.run(entry.name)
+            if (today.getMilliseconds() - entryDate.getMilliseconds() > 100) {
+                this._taskManager.add(new Task(unfollowUserRoutine, [entry.name]))
                 unfollowed.push(entry.name)
             }
             i++

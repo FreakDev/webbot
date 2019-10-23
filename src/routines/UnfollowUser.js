@@ -5,17 +5,23 @@ const CONFIRM_UNFOLLOW_BTN_SELECTOR = "div[role=dialog] button:first-child";
 
 export default class UnfollowUser extends RoutineAbstract {
 
+    _name = "unfollow-user"
+
     async run (username) {
 
-        this._logger.log('start')
+        this._logger.log('start unfollowing ', username)
 
         await this._gotoProfilePage(username)
         const alreadyFollowed = await this._checkAlreadyFollowed()
+        this._logger.info("Do i follow you ?");
         if (alreadyFollowed) {
+            this._logger.info("maybe i should not...");
             await this._tryUnfollow()
-            return await !this._checkAlreadyFollowed();
+            const result = await !this._checkAlreadyFollowed();
+            result ? this._logger.info("don't do anymore") : this._logger.warn("ooops i can't unfollow you")
+            return result
         } else {
-            this._logger.info("Not following");
+            this._logger.info("Nope i don't");
         }
         return true;
     }
