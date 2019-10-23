@@ -2,6 +2,8 @@ import RoutineAbstract from "./RoutineAbstract";
 
 export default class GetUserStats extends RoutineAbstract {
 
+    _name = "get-user-stats"
+
     async run (username) {
 
         this._logger.log('start');

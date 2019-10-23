@@ -4,6 +4,8 @@ const AUTHOR_BTN_SELECTOR = "article header > div:nth-child(2) h2 a";
 
 export default class GetPhotoAuthor extends RoutineAbstract {
 
+    _name = "get-photo-author"
+
     async run (photoUrl) {
 
         this._logger.log('start')
