@@ -13,9 +13,9 @@ export default class ProcessLatestPhotosByTag extends RoutineAbstract {
 
         const likePhotoRoutine = new LikePhoto (this._browser, this._logger.createInstance("LIKE PHOTO")),
             getPhotosByTagRoutine = new GetPhotosByTag(this._browser, this._logger.createInstance("GET PHOTOS BY TAGS")),
-            checkFollow = new CheckFollow(this._browser, this._logger.createInstance("CHECK FOLLOW"), this._taskManager)
+            checkFollowRoutine = new CheckFollow(this._browser, this._logger.createInstance("CHECK FOLLOW"), this._taskManager)
 
-        const routinesTask = new Task(
+        this._taskManager.add( new Task(
             getPhotosByTagRoutine, tags )
                 .then((photosList) => {
                     let currentPhoto = photosList.pop();
@@ -23,15 +23,11 @@ export default class ProcessLatestPhotosByTag extends RoutineAbstract {
                     while (currentPhoto) {
 
                         this._taskManager.add(new Task( likePhotoRoutine, [currentPhoto] ));
-                        this._taskManager.add(new Task(checkFollow, [currentPhoto]));
+                        this._taskManager.add(new Task(checkFollowRoutine, [currentPhoto]));
                         currentPhoto = photosList.pop();
                     }
                 })
-
-
-        this._taskManager.add( routinesTask )
-
-        this._taskManager.run()
+        );
 
     }
 
